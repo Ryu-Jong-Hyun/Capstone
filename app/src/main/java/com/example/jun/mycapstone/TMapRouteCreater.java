@@ -1,8 +1,7 @@
 package com.example.jun.mycapstone;
 
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+//import com.google.gson.Gson;
+//import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -47,15 +46,15 @@ public class TMapRouteCreater {
 
             //System.out.println("T_Map에서 가져온 좌표정보를 GSON을 사용해 JSON형식 데이터를 파싱한 결과:");
 
-            Type typeOfHashMap = new TypeToken<Map<String, SearchPoiInfo>>() { }.getType();
-            Map<String, SearchPoiInfo> newMap = new Gson().fromJson(result, typeOfHashMap);
+      //      Type typeOfHashMap = new TypeToken<Map<String, SearchPoiInfo>>() { }.getType();
+          //  Map<String, SearchPoiInfo> newMap = new Gson().fromJson(result, typeOfHashMap);
 
-            SearchPoiInfo info=newMap.get("searchPoiInfo");
+          //  SearchPoiInfo info=newMap.get("searchPoiInfo");
 
             // num1 = info.getPois().get("poi").get(0).getNoorLat();
             //num2 = info.getPois().get("poi").get(0).getNoorLon();
 
-            return  info;
+           // return  info;
 
         } catch (Exception e) {
             e.printStackTrace();

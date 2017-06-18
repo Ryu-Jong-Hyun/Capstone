@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.jun.atest.R;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapGpsManager;
 import com.skp.Tmap.TMapPOIItem;
@@ -102,15 +103,15 @@ public class NavigationActivity_1 extends AppCompatActivity implements TMapGpsMa
         initTmap();
 
         /// BookMark Test Start ///
-        if (com.example.jun.atest.BookMarkActivity.Bookmark != null)
+        if (com.example.jun.mycapstone.BookMarkActivity.Bookmark != null)
         {
             Intent intent = getIntent();
             num1 = intent.getDoubleExtra("Lat", 0.0);
             num2 = intent.getDoubleExtra("Lon", 0.0);
 
-            Toast.makeText(NavigationActivity_1.this, com.example.jun.atest.BookMarkActivity.Bookmark, Toast.LENGTH_SHORT).show();
+            Toast.makeText(NavigationActivity_1.this, com.example.jun.mycapstone.BookMarkActivity.Bookmark, Toast.LENGTH_SHORT).show();
             rCreater = new TMapRouteCreater();
-            string2 = com.example.jun.atest.BookMarkActivity.Bookmark;
+            string2 = com.example.jun.mycapstone.BookMarkActivity.Bookmark;
             SearchPoiInfo endPoint = rCreater.requestInfo(string2);
             target1 = endPoint.getPois().get("poi").get(0).getNoorLat();
             target2 = endPoint.getPois().get("poi").get(0).getNoorLon();

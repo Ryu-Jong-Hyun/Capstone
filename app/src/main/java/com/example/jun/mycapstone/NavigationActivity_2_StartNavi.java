@@ -2,18 +2,75 @@ package com.example.jun.mycapstone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NavigationActivity_2_StartNavi extends AppCompatActivity {
+import com.example.jun.atest.R;
+import com.skp.Tmap.TMapData;
+import com.skp.Tmap.TMapGpsManager;
+import com.skp.Tmap.TMapPoint;
+import com.skp.Tmap.TMapPolyLine;
+import com.skp.Tmap.TMapView;
+
+import static com.example.jun.mycapstone.DrawSurfaceView.dc;
+
+public class NavigationActivity_2_StartNavi extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback{
+    private static final String TAG = "Compass";
+    private static boolean DEBUG = false;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private DrawSurfaceView mDrawView;
+    LocationManager locMgr;
+    int dc_count = dc;
+    int dc_num = 0;
+    int vibe_sec = 0;
+    MediaPlayer voice_g = new MediaPlayer();
+    MediaPlayer voice_left = new MediaPlayer();
+    MediaPlayer voice_right = new MediaPlayer();
+    MediaPlayer voice_finish = new MediaPlayer();
+    private TMapView tmap;
+    boolean key;
+    double target_lat, target_lon;
+    double start_lat, start_lon;
+    TMapData mini_Line;
+    TMapPoint StartPoint, EndPoint, tpoint;
+    double lon, lat;
+    static boolean finish_navi = false;
+
+
+    double a, b; //NavigationActivity_1에서 받아온 현재좌표를 받아주기 위한 변수
+
+    private final SensorEventListener mListener = new SensorEventListener() {
+        public void onSensorChanged(SensorEvent event) {
+            if (DEBUG)
+                Log.d(TAG, "sensorChanged (" + event.values[0] + ", " + event.values[1] + ", " + event.values[2] + ")");
+            if (mDrawView != null) {
+                mDrawView.setOffset(event.values[0]);
+                mDrawView.invalidate();
+            }
+        }
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
 
 
     //거리 계산 부분//
@@ -84,7 +141,18 @@ public class NavigationActivity_2_StartNavi extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onLocationChange(Location location) {
+        tmap.setLocationPoint(location.getLongitude(), location.getLatitude());
 
+        tmap.setZoomLevel(15);
+        tmap.setCenterPoint(tpoint.getLongitude(), tpoint.getLatitude());
+
+        lon = location.getLongitude();
+        lat = location.getLatitude();
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,11 +221,69 @@ public class NavigationActivity_2_StartNavi extends AppCompatActivity {
             public void onClick(View v) {
                 mHandler.removeMessages(0);
                 finish_navi = true; ///초기화
-                com.example.jun.atest.BookMarkActivity.Bookmark = null; ///초기화
+                com.example.jun.mycapstone.BookMarkActivity.Bookmark = null; ///초기화
                 finish();
             }
         });
 
         // 미니맵 구현 //
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        mDrawView = (DrawSurfaceView) findViewById(R.id.drawSurfaceView);
+        locMgr = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        LocationProvider high = locMgr.getProvider(locMgr.getBestProvider(LocationUtils.createFineCriteria(), true));
+
+        mHandler.sendEmptyMessage(0); //거리계산부분
+
+        //try catch문 삽입해서 빨간줄 없앤 부분//
+        try {
+            locMgr.requestLocationUpdates(high.getName(), 0, 0f, new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    Log.d(TAG, "Location Changed");
+
+                    mDrawView.setMyLocation(location.getLatitude(), location.getLongitude());
+                    mDrawView.invalidate();
+                }
+
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+                }
+
+                public void onProviderEnabled(String s) {
+                }
+
+                public void onProviderDisabled(String s) {
+                }
+            });
+        } catch (SecurityException e) {
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        if (DEBUG) {
+            Log.d(TAG, "onResume");
+        }
+
+        super.onResume();
+
+        mSensorManager.registerListener(mListener, mSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onStop() {
+        if (DEBUG)
+            Log.d(TAG, "onStop");
+        mSensorManager.unregisterListener(mListener);
+        super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        mHandler.removeMessages(0);
+        finish_navi = true; ///초기화
+        BookMarkActivity.Bookmark = null; ///초기화
+        finish();
+        super.onBackPressed();
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/navi1_background"
     android:orientation="vertical"
-    tools:context="com.example.jun.atest.MapViewActivity_1"
+    tools:context="com.example.jun.mycapstone.MapViewActivity_1"
     android:weightSum="1">
 
 

@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.example.jun.atest.R;
+
 import java.util.ArrayList;
 
 public class DrawSurfaceView extends View{

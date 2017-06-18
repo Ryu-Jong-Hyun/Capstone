@@ -16,9 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.jun.mycapstone.DBManager;
-
+import com.example.jun.atest.R;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -33,7 +31,7 @@ public class BookMarkActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_mark2);
+        setContentView(R.layout.activity_book_mark);
 
         final DBManager dbManager = new DBManager(getApplicationContext(), "BookMarkInfo.db", null, 1);
 

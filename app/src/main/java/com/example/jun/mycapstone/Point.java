@@ -1,4 +1,5 @@
-package com.example.jun.atest;
+package com.example.jun.mycapstone;
+
 
 public class Point{
 

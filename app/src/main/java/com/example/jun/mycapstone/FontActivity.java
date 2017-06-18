@@ -1,4 +1,5 @@
-package com.example.jun.atest;
+package com.example.jun.mycapstone;
+
 
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;

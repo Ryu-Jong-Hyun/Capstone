@@ -1,13 +1,89 @@
 package com.example.jun.mycapstone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class NavigationActivity_2_StartNavi extends AppCompatActivity {
+
+
+    //거리 계산 부분//
+    Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+
+            Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            TextView endDis = (TextView) findViewById(R.id.endDis);
+            TextView turnDis = (TextView) findViewById(R.id.turnTypeDis);
+            endDis.setText("총:" + String.valueOf((long) NavigationActivity_1.allDis) + "m");
+            turnDis.setText("안내:" + String.valueOf((long) DrawSurfaceView.dis1) + "m");
+
+            if (OptionActivity.change_vibration.equals("vibe_on")) {
+                vibe_sec = 1000;
+            }
+
+            if (OptionActivity.change_sound.equals("sound_on")) {
+                voice_g = voice_g.create(NavigationActivity_2_StartNavi.this, R.raw.go);
+                voice_left = voice_left.create(NavigationActivity_2_StartNavi.this, R.raw.left);
+                voice_right = voice_right.create(NavigationActivity_2_StartNavi.this, R.raw.right);
+                voice_finish = voice_finish.create(NavigationActivity_2_StartNavi.this, R.raw.destination);
+            }
+
+            if(dc_num == dc_count) {
+                dc_count = dc;
+
+                switch (DrawSurfaceView.dc_number) {
+                    case 0:
+                        Toast.makeText(NavigationActivity_2_StartNavi.this, "경로안내를 시작합니다.", Toast.LENGTH_SHORT).show();
+                        vibe.vibrate(vibe_sec);
+                        dc_num++;
+                        break;
+                    case 1:
+                        voice_g.start();
+                        vibe.vibrate(vibe_sec);
+                        dc_num++;
+                        break;
+                    case 2:
+                        voice_left.start();
+                        vibe.vibrate(vibe_sec);
+                        dc_num++;
+                        break;
+                    case 3:
+                        voice_right.start();
+                        vibe.vibrate(vibe_sec);
+                        dc_num++;
+                        break;
+                    case 4:
+                        voice_finish.start();
+                        vibe.vibrate(vibe_sec);
+                        dc_num++;
+                        break;
+                }
+            }
+
+            if (dc_count > NavigationActivity_1.j) {
+                finish_navi = true;
+                dc_num = 0;
+            }
+
+            if(DrawSurfaceView.checkFinish == 1){
+                Toast.makeText(NavigationActivity_2_StartNavi.this, "목적지에 도착했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NavigationActivity_2_StartNavi.this, "경로안내를 중단합니다.", Toast.LENGTH_SHORT).show();
+            }
+
+            mHandler.sendEmptyMessageDelayed(0, 3000);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

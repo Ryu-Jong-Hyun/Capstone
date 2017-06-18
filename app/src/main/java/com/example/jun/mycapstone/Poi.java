@@ -1,4 +1,5 @@
-package com.example.jun.atest;
+package com.example.jun.mycapstone;
+
 
 /**
  * Created by jun on 2017-03-05.

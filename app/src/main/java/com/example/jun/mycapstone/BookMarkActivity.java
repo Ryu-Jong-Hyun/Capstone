@@ -1,4 +1,4 @@
-package com.example.jun.atest;
+package com.example.jun.mycapstone;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.jun.mycapstone.DBManager;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;

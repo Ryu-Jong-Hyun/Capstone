@@ -1,4 +1,5 @@
-package com.example.jun.atest;
+package com.example.jun.mycapstone;
+
 
 /**
  * Created by jun on 2017-03-05.
@@ -14,7 +15,7 @@ public class SearchPoiInfo {
     private int count;
     private int page;
 
-    private HashMap<String, List<com.example.jun.atest.Poi>> pois=new HashMap<String, List<com.example.jun.atest.Poi>>();
+    private HashMap<String, List<Poi>> pois=new HashMap<String, List<Poi>>();
 
     public int getTotalCount() {
         return totalCount;
@@ -40,11 +41,11 @@ public class SearchPoiInfo {
         this.page = page;
     }
 
-    public HashMap<String, List<com.example.jun.atest.Poi>> getPois() {
+    public HashMap<String, List<Poi>> getPois() {
         return pois;
     }
 
-    public void setPois(HashMap<String, List<com.example.jun.atest.Poi>> pois) {
+    public void setPois(HashMap<String, List<Poi>> pois) {
         this.pois = pois;
     }
 

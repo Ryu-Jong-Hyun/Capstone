@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context="com.example.jun.atest.BookMarkActivity"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bookmarktitle"
+        android:textSize="40dp"
+        android:padding="15dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="추가할 북마크를 입력하세요."
+            android:layout_weight="3"
+            android:id="@+id/Edit_BookMark"/>
+
+        <ImageButton
+            android:id="@+id/Add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="425dp"
+            android:background="#00ff0000"
+            android:src="@drawable/addbutton"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="343dp"
+        android:layout_height="280dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintTop_toBottomOf="@+id/Title_text"
+        tools:layout_editor_absoluteX="17dp"
+        android:layout_weight="0.27" />
+</LinearLayout>

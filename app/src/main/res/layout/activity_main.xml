@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jun.mycapstone.MainActivity">
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.jun.atest.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/button_Navigation"
+            android:layout_width="158dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#00ff0000"
+            android:drawableRight="@drawable/point"
+
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/button_MapView"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#00ff0000"
+            android:drawableRight="@drawable/mapmap"
+            android:textSize="25dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_BookMark"
+            android:layout_width="153dp"
+            android:layout_height="133dp"
+            android:layout_gravity="top"
+            android:background="#00ff0000"
+            android:drawableRight="@drawable/bookbook"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/button_Option"
+            android:layout_width="132dp"
+            android:layout_height="142dp"
+            android:layout_gravity="top"
+            android:background="#00ff0000"
+            android:drawableRight="@drawable/optionoption"
+            android:textSize="25dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

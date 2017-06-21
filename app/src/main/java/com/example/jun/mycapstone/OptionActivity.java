@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -93,17 +94,18 @@ public class OptionActivity extends AppCompatActivity {
             }
         });
 
-        final Button Point_button = (Button)findViewById(R.id.PointOptionButton);
+        final ImageView Point_Image = (ImageView)findViewById(R.id.PointImageView);
         if(dbManager.Orange_select().equals("orange_on")) {
-            Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo,0);
+            Point_Image.setImageResource(R.drawable.minigo);
         } else if(dbManager.Green_select().equals("green_on")){
-            Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo_g,0);
+            Point_Image.setImageResource(R.drawable.minigo_g);
         } else if(dbManager.Blue_select().equals("blue_on")){
-            Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo_b,0);
+            Point_Image.setImageResource(R.drawable.minigo_b);
         } else {
-            Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo,0);
+            Point_Image.setImageResource(R.drawable.minigo);
         }
 
+        final Button Point_button = (Button)findViewById(R.id.PointOptionButton);
         Point_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,19 +121,19 @@ public class OptionActivity extends AppCompatActivity {
                                 DrawSurfaceView.C_point = "Orange";
                                 DBManager.update_sep = 5;
                                 dbManager.update();
-                                Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo,0);
+                                Point_Image.setImageResource(R.drawable.minigo);
                                 break;
                             case 1:
                                 DrawSurfaceView.C_point = "Green";
                                 DBManager.update_sep = 6;
                                 dbManager.update();
-                                Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo_g,0);
+                                Point_Image.setImageResource(R.drawable.minigo_g);
                                 break;
                             case 2:
                                 DrawSurfaceView.C_point = "Blue";
                                 DBManager.update_sep = 7;
                                 dbManager.update();
-                                Point_button.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.minigo_b,0);
+                                Point_Image.setImageResource(R.drawable.minigo_b);
                                 break;
                         }
                     }

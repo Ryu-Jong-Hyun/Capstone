@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class DrawSurfaceView2 extends View {
-    Point me = new Point(MainActivity.Lat, MainActivity.Lon, "Me", 0);
+    Point me = new Point(MainActivity.Lat, MainActivity.Lon, "Me");
     Paint mPaint = new Paint();
 
     private Context mContext;
@@ -60,6 +60,9 @@ public class DrawSurfaceView2 extends View {
 
     AlertDialog alertDialog;
 
+    int num;
+    static double BDis[];
+
     public DrawSurfaceView2(Context c, Paint paint) {
         super(c);
     }
@@ -71,15 +74,15 @@ public class DrawSurfaceView2 extends View {
             hereLat = MainActivity.Lat;
             hereLon = MainActivity.Lon;
 
-            int num = MapViewActivity_1.rLength;
-            double BDis[] = new double[num];
+            num = MapViewActivity_1.rLength;
+            BDis = new double[num];
 
             for(int i = 0; i < MapViewActivity_1.rLength; i++) {
                 BDis[i] = calDistance(hereLat, hereLon, MapViewActivity_1.lat[i], MapViewActivity_1.lon[i]);
             }
 
             for (int i = 0; i < MapViewActivity_1.rLength; i++) {
-                props.add(new Point(MapViewActivity_1.lat[i], MapViewActivity_1.lon[i], MapViewActivity_1.bname[i], BDis[i]));
+                props.add(new Point(MapViewActivity_1.lat[i], MapViewActivity_1.lon[i], MapViewActivity_1.bname[i]));
             }
 
             mSpots = new Bitmap[props.size()];
@@ -345,6 +348,12 @@ public class DrawSurfaceView2 extends View {
 
                     if (event.getX() <= screenPoint.get(i).x + imagesPoint.get(i).getWidth() && event.getX() >= screenPoint.get(i).x && event.getY()
                             <= screenPoint.get(i).y + imagesPoint.get(i).getHeight() && event.getY() >= screenPoint.get(i).y) {
+
+                        for(int j = 0; j < MapViewActivity_1.rLength; j++){
+                            if(MapViewActivity_1.bname[j].equals(screenPoint.get(i).getDescription())){
+                                Toast.makeText(mContext, "남아있는 거리는 "+String.valueOf((long)BDis[j])+"m 입니다.", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
                         TMapBuildingCreater bCreater = new TMapBuildingCreater();
                         TMapBuildingCreater2 bCreater2 = new TMapBuildingCreater2();

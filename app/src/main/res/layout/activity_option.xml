@@ -29,18 +29,37 @@
         android:layout_height="17dp"
         ></TextView>
 
-    <Button
-        android:id="@+id/PointOptionButton"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="#00ff0000"
-        android:drawablePadding="130dp"
-        android:drawableRight="@drawable/minigo"
-        android:text="화살표 색상"
-        android:textAllCaps="false"
-        android:textColor="#3DADC3"
-        android:textSize="30dp" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/PointOptionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="#00ff0000"
+            android:gravity="left"
+            android:text="화살표 색상"
+            android:textAllCaps="false"
+            android:textColor="#3DADC3"
+            android:textSize="30dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/PointImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:gravity="right"
+            android:src="@drawable/minigo" />
+
+    </LinearLayout>
 
 
     <TextView

@@ -76,6 +76,7 @@ public class NavigationActivity_2_StartNavi extends AppCompatActivity implements
     //거리 계산 부분//
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
+            final DBManager dbManager = new DBManager(getApplicationContext(), "OptionInfo.db", null, 1);
 
             Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -84,11 +85,11 @@ public class NavigationActivity_2_StartNavi extends AppCompatActivity implements
             endDis.setText("총:" + String.valueOf((long) NavigationActivity_1.allDis) + "m");
             turnDis.setText("안내:" + String.valueOf((long) DrawSurfaceView.dis1) + "m");
 
-            if (OptionActivity.change_vibration.equals("vibe_on")) {
+            if (dbManager.Vibe_select().equals("vibe_on")) {
                 vibe_sec = 1000;
             }
 
-            if (OptionActivity.change_sound.equals("sound_on")) {
+            if (dbManager.Sound_select().equals("sound_on")) {
                 voice_g = voice_g.create(NavigationActivity_2_StartNavi.this, R.raw.go);
                 voice_left = voice_left.create(NavigationActivity_2_StartNavi.this, R.raw.left);
                 voice_right = voice_right.create(NavigationActivity_2_StartNavi.this, R.raw.right);

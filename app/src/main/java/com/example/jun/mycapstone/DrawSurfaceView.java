@@ -17,7 +17,7 @@ import com.example.jun.atest.R;
 import java.util.ArrayList;
 
 public class DrawSurfaceView extends View{
-    Point me = new Point(NavigationActivity_1.lat, NavigationActivity_1.lon, "Me",0);
+    Point me = new Point(NavigationActivity_1.lat, NavigationActivity_1.lon, "Me");
     Paint mPaint = new Paint();
     private double OFFSET = 0d;
     private double screenWidth, screenHeight = 0d;
@@ -146,7 +146,7 @@ public class DrawSurfaceView extends View{
 
             if(dc < NavigationActivity_1.j) {
                 for(int j=0; j < NavigationActivity_1.j; j++) {
-                    props.add(new Point(y[j], x[j], NavigationActivity_1.MyTarget(),0));
+                    props.add(new Point(y[j], x[j], NavigationActivity_1.MyTarget()));
                 }
 
                 dis1 = calDistance(navi_lat, navi_lon, y[dc], x[dc]);

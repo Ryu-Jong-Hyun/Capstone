@@ -4,14 +4,17 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jun.atest.R;
@@ -72,6 +75,25 @@ public class MainActivity extends AppCompatActivity implements TMapGpsManager.on
         Button MapViewbutton = (Button) findViewById(R.id.button_MapView);
         Button BookMarkbutton = (Button) findViewById(R.id.button_BookMark);
         Button Optionbutton = (Button) findViewById(R.id.button_Option);
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this,alertDialog.THEME_HOLO_DARK);
+        alertDialog = alertBuilder.create();
+        TextView title = new TextView(MainActivity.this);
+        title.setText("Please Wait.....");
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(20);
+        title.setPadding(10,15,10,15);
+
+        TextView message = new TextView(MainActivity.this);
+        message.setText("DB를 읽어오는 중입니다.");
+        message.setGravity(Gravity.CENTER);
+        message.setTextColor(Color.WHITE);
+        message.setTextSize(20);
+        message.setPadding(10,10,10,20);
+
+        alertDialog.setCustomTitle(title);
+        alertDialog.setView(message);
 
         //네이게이션 버튼 이동
         Navibutton.setOnClickListener(new View.OnClickListener() {
